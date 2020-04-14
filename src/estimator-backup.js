@@ -21,7 +21,7 @@ return data
 	severeImpact: {} // your severe case estimation
 }
 */
-
+ 
 let impact = {};
 let severeImpact = {};
 
