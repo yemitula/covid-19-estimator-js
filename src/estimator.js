@@ -22,8 +22,8 @@ const covid19ImpactEstimator = (data) => {
   // get factor by dividing number of days by 3
   const factor = Math.round(days / 3);
   // compute infectionsByRequestedTime using currentlyInfected and factor
-  impact.infectionsByRequestedTime = impact.currentlyInfected * 2 ** factor;
-  severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * 2 ** factor;
+  impact.infectionsByRequestedTime = impact.currentlyInfected * (2 ** factor);
+  severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * (2 ** factor);
 
   // CHALLENGE 2
   // compute severeCasesByRequestedTime
