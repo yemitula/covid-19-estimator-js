@@ -33,7 +33,7 @@ const covid19ImpactEstimator = (data) => {
   const bedsAvailable = 0.35 * data.totalHospitalBeds;
   // compute number of available beds for COVID-19
   impact.hospitalBedsByRequestedTime = bedsAvailable - impact.severeCasesByRequestedTime;
-  severeImpact.hospitalBedsByRequestedTime = bedsAvailable 
+  severeImpact.hospitalBedsByRequestedTime = bedsAvailable
     - severeImpact.severeCasesByRequestedTime;
 
   // CHALLENGE 3
@@ -44,15 +44,15 @@ const covid19ImpactEstimator = (data) => {
   impact.casesForVentilatorsByRequestedTime = 0.02 * impact.infectionsByRequestedTime;
   severeImpact.casesForVentilatorsByRequestedTime = 0.02 * severeImpact.infectionsByRequestedTime;
   // compute dollarsInFlight
-  impact.dollarsInFlight = impact.infectionsByRequestedTime 
+  impact.dollarsInFlight = impact.infectionsByRequestedTime
     * data.region.avgDailyIncomePopulation * data.region.avgDailyIncomeInUSD * days;
-  severeImpact.dollarsInFlight = severeImpact.infectionsByRequestedTime 
+  severeImpact.dollarsInFlight = severeImpact.infectionsByRequestedTime
     * data.region.avgDailyIncomePopulation * data.region.avgDailyIncomeInUSD * days;
 
   return {
-    data: data,
-    impact: impact,
-    severeImpact: severeImpact,
+    data,
+    impact,
+    severeImpact
   };
 };
 
