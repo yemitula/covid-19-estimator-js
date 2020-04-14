@@ -22,32 +22,52 @@ const covid19ImpactEstimator = (data) => {
   // get factor by dividing number of days by 3
   const factor = Math.round(days / 3);
   // compute infectionsByRequestedTime using currentlyInfected and factor
-  impact.infectionsByRequestedTime = impact.currentlyInfected * (2 ** factor);
-  severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * (2 ** factor);
+  impact.infectionsByRequestedTime = impact.currentlyInfected * 2 ** factor;
+  severeImpact.infectionsByRequestedTime =
+    severeImpact.currentlyInfected * 2 ** factor;
 
   // CHALLENGE 2
   // compute severeCasesByRequestedTime
-  impact.severeCasesByRequestedTime = Math.round(0.15 * impact.infectionsByRequestedTime);
-  severeImpact.severeCasesByRequestedTime = Math.round(0.15 * severeImpact.infectionsByRequestedTime);
+  impact.severeCasesByRequestedTime = Math.round(
+    0.15 * impact.infectionsByRequestedTime
+  );
+  severeImpact.severeCasesByRequestedTime = Math.round(
+    0.15 * severeImpact.infectionsByRequestedTime
+  );
   // compute number of available hospital beds
   const bedsAvailable = Math.round(0.35 * data.totalHospitalBeds);
   // compute number of available beds for COVID-19
-  impact.hospitalBedsByRequestedTime = bedsAvailable - impact.severeCasesByRequestedTime;
-  severeImpact.hospitalBedsByRequestedTime = bedsAvailable
-    - severeImpact.severeCasesByRequestedTime;
+  impact.hospitalBedsByRequestedTime =
+    bedsAvailable - impact.severeCasesByRequestedTime;
+  severeImpact.hospitalBedsByRequestedTime =
+    bedsAvailable - severeImpact.severeCasesByRequestedTime;
 
   // CHALLENGE 3
   // compute casesForICUByRequestedTime
-  impact.casesForICUByRequestedTime = Math.round(0.05 * impact.infectionsByRequestedTime);
-  severeImpact.casesForICUByRequestedTime = Math.round(0.05 * severeImpact.infectionsByRequestedTime);
+  impact.casesForICUByRequestedTime = Math.round(
+    0.05 * impact.infectionsByRequestedTime
+  );
+  severeImpact.casesForICUByRequestedTime = Math.round(
+    0.05 * severeImpact.infectionsByRequestedTime
+  );
   // compute casesForVentilatorsByRequestedTime
-  impact.casesForVentilatorsByRequestedTime = Math.round(0.02 * impact.infectionsByRequestedTime);
-  severeImpact.casesForVentilatorsByRequestedTime = Math.round(0.02 * severeImpact.infectionsByRequestedTime);
+  impact.casesForVentilatorsByRequestedTime = Math.round(
+    0.02 * impact.infectionsByRequestedTime
+  );
+  severeImpact.casesForVentilatorsByRequestedTime = Math.round(
+    0.02 * severeImpact.infectionsByRequestedTime
+  );
   // compute dollarsInFlight
-  impact.dollarsInFlight = impact.infectionsByRequestedTime
-    * data.region.avgDailyIncomePopulation * data.region.avgDailyIncomeInUSD * days;
-  severeImpact.dollarsInFlight = severeImpact.infectionsByRequestedTime
-    * data.region.avgDailyIncomePopulation * data.region.avgDailyIncomeInUSD * days;
+  impact.dollarsInFlight =
+    impact.infectionsByRequestedTime *
+    data.region.avgDailyIncomePopulation *
+    data.region.avgDailyIncomeInUSD *
+    days;
+  severeImpact.dollarsInFlight =
+    severeImpact.infectionsByRequestedTime *
+    data.region.avgDailyIncomePopulation *
+    data.region.avgDailyIncomeInUSD *
+    days;
 
   return {
     data,
