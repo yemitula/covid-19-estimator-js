@@ -22,8 +22,8 @@ const covid19ImpactEstimator = (data) => {
   // get factor by dividing number of days by 3
   const factor = days / 3;
   // compute infectionsByRequestedTime using currentlyInfected and factor
-  impact.infectionsByRequestedTime = impact.currentlyInfected * Math.pow(2, factor);
-  severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * (2**factor);
+  impact.infectionsByRequestedTime = impact.currentlyInfected * (2 ** factor);
+  severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * (2 ** factor);
 
   // CHALLENGE 2
   // compute severeCasesByRequestedTime
@@ -33,7 +33,8 @@ const covid19ImpactEstimator = (data) => {
   const bedsAvailable = 0.35 * data.totalHospitalBeds;
   // compute number of available beds for COVID-19
   impact.hospitalBedsByRequestedTime = bedsAvailable - impact.severeCasesByRequestedTime;
-  severeImpact.hospitalBedsByRequestedTime = bedsAvailable - severeImpact.severeCasesByRequestedTime;
+  severeImpact.hospitalBedsByRequestedTime = bedsAvailable 
+    - severeImpact.severeCasesByRequestedTime;
 
   // CHALLENGE 3
   // compute casesForICUByRequestedTime
@@ -43,13 +44,15 @@ const covid19ImpactEstimator = (data) => {
   impact.casesForVentilatorsByRequestedTime = 0.02 * impact.infectionsByRequestedTime;
   severeImpact.casesForVentilatorsByRequestedTime = 0.02 * severeImpact.infectionsByRequestedTime;
   // compute dollarsInFlight
-  impact.dollarsInFlight = impact.infectionsByRequestedTime * data.region.avgDailyIncomePopulation * data.region.avgDailyIncomeInUSD * days;
-  severeImpact.dollarsInFlight = severeImpact.infectionsByRequestedTime * data.region.avgDailyIncomePopulation * data.region.avgDailyIncomeInUSD * days;
+  impact.dollarsInFlight = impact.infectionsByRequestedTime 
+    * data.region.avgDailyIncomePopulation * data.region.avgDailyIncomeInUSD * days;
+  severeImpact.dollarsInFlight = severeImpact.infectionsByRequestedTime 
+    * data.region.avgDailyIncomePopulation * data.region.avgDailyIncomeInUSD * days;
 
   return {
     data: data,
     impact: impact,
-    severeImpact: severeImpact
+    severeImpact: severeImpact,
   };
 };
 
