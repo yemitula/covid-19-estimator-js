@@ -1,7 +1,7 @@
 
 const covid19ImpactEstimator = (data) => {
-    impact = {};
-    severeImpact = {};
+    let impact = {};
+    let severeImpact = {};
     
     // CHALLENGE 1
     // compute currentlyInfected values using reportedCases
