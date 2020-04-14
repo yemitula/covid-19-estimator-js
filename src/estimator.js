@@ -27,10 +27,10 @@ const covid19ImpactEstimator = (data) => {
 
   // CHALLENGE 2
   // compute severeCasesByRequestedTime
-  impact.severeCasesByRequestedTime = 0.15 * impact.infectionsByRequestedTime;
-  severeImpact.severeCasesByRequestedTime = 0.15 * severeImpact.infectionsByRequestedTime;
+  impact.severeCasesByRequestedTime = Math.round(0.15 * impact.infectionsByRequestedTime);
+  severeImpact.severeCasesByRequestedTime = Math.round(0.15 * severeImpact.infectionsByRequestedTime);
   // compute number of available hospital beds
-  const bedsAvailable = 0.35 * data.totalHospitalBeds;
+  const bedsAvailable = Math.round(0.35 * data.totalHospitalBeds);
   // compute number of available beds for COVID-19
   impact.hospitalBedsByRequestedTime = bedsAvailable - impact.severeCasesByRequestedTime;
   severeImpact.hospitalBedsByRequestedTime = bedsAvailable
@@ -38,11 +38,11 @@ const covid19ImpactEstimator = (data) => {
 
   // CHALLENGE 3
   // compute casesForICUByRequestedTime
-  impact.casesForICUByRequestedTime = 0.05 * impact.infectionsByRequestedTime;
-  severeImpact.casesForICUByRequestedTime = 0.05 * severeImpact.infectionsByRequestedTime;
+  impact.casesForICUByRequestedTime = Math.round(0.05 * impact.infectionsByRequestedTime);
+  severeImpact.casesForICUByRequestedTime = Math.round(0.05 * severeImpact.infectionsByRequestedTime);
   // compute casesForVentilatorsByRequestedTime
-  impact.casesForVentilatorsByRequestedTime = 0.02 * impact.infectionsByRequestedTime;
-  severeImpact.casesForVentilatorsByRequestedTime = 0.02 * severeImpact.infectionsByRequestedTime;
+  impact.casesForVentilatorsByRequestedTime = Math.round(0.02 * impact.infectionsByRequestedTime);
+  severeImpact.casesForVentilatorsByRequestedTime = Math.round(0.02 * severeImpact.infectionsByRequestedTime);
   // compute dollarsInFlight
   impact.dollarsInFlight = impact.infectionsByRequestedTime
     * data.region.avgDailyIncomePopulation * data.region.avgDailyIncomeInUSD * days;
