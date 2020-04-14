@@ -27,21 +27,21 @@ const covid19ImpactEstimator = (data) => {
 
   // CHALLENGE 2
   // compute severeCasesByRequestedTime
-  impact.severeCasesByRequestedTime = Math.trunc(
-    0.15 * impact.infectionsByRequestedTime
-  );
-  severeImpact.severeCasesByRequestedTime = Math.trunc(
-    0.15 * severeImpact.infectionsByRequestedTime
-  );
+  // impact
+  const iSevereCasesByRequestedTime = 0.15 * impact.infectionsByRequestedTime;
+  impact.severeCasesByRequestedTime = Math.trunc(iSevereCasesByRequestedTime);
+  // severe impact
+  const sSevereCasesByRequestedTime = 0.15 * severeImpact.infectionsByRequestedTime;
+  severeImpact.severeCasesByRequestedTime = Math.trunc(sSevereCasesByRequestedTime);
   // compute number of available hospital beds
   const bedsAvailable = Math.trunc(0.35 * data.totalHospitalBeds);
   // compute number of available beds for COVID-19
-  impact.hospitalBedsByRequestedTime = bedsAvailable > impact.severeCasesByRequestedTime
+  impact.hospitalBedsByRequestedTime = bedsAvailable > iSevereCasesByRequestedTime
     ? bedsAvailable
-    : bedsAvailable - impact.severeCasesByRequestedTime;
-  severeImpact.hospitalBedsByRequestedTime = bedsAvailable > severeImpact.severeCasesByRequestedTime
+    : bedsAvailable - iSevereCasesByRequestedTime;
+  severeImpact.hospitalBedsByRequestedTime = bedsAvailable > sSevereCasesByRequestedTime
     ? bedsAvailable
-    : bedsAvailable - severeImpact.severeCasesByRequestedTime;
+    : bedsAvailable - sSevereCasesByRequestedTime;
 
   // CHALLENGE 3
   // compute casesForICUByRequestedTime
